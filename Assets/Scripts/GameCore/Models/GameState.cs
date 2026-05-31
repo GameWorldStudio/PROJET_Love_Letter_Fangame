@@ -7,7 +7,7 @@ public class GameState
     public List<string> Logs { get; } = new();
     public List<CardType> VisibleBurnedCards { get; } = new();
 
-    public LocalPlayerState[] Players { get; set; }
+    public PlayerState[] Players { get; set; }
     public PendingActionState PendingAction { get; set; } = new();
 
     public CardType HiddenBurnedCard { get; set; }

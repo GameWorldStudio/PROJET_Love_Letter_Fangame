@@ -44,8 +44,8 @@ public class LocalGameController : MonoBehaviour
         {
             Players = new[]
             {
-                new LocalPlayerState(humanPlayerName, false),
-                new LocalPlayerState(ghostPlayerName, true)
+                new PlayerState(humanPlayerName, false),
+                new PlayerState(ghostPlayerName, true)
             }
         };
 

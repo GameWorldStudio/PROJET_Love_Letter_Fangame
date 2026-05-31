@@ -95,7 +95,7 @@ public class ServerGameController : NetworkBehaviour
     {
         gameState = new GameState
         {
-            Players = new LocalPlayerState[players.Count]
+            Players = new PlayerState[players.Count]
         };
 
         for (int i = 0; i < players.Count; i++)
@@ -104,7 +104,7 @@ public class ServerGameController : NetworkBehaviour
                 ? $"Joueur {i + 1}"
                 : players[i].PlayerName;
 
-            gameState.Players[i] = new LocalPlayerState(playerName, isGhost: false);
+            gameState.Players[i] = new PlayerState(playerName, isGhost: false);
         }
     }
 
@@ -413,7 +413,7 @@ public class ServerGameController : NetworkBehaviour
 
         for (int i = 0; i < gameState.Players.Length; i++)
         {
-            LocalPlayerState source = gameState.Players[i];
+            PlayerState source = gameState.Players[i];
 
             snapshot.players[i] = new LoveLetterNetworkPlayer.PlayerPublicView
             {

@@ -173,8 +173,8 @@ public class LocalGameUI : MonoBehaviour
 
     private void RenderHeader(GameState game)
     {
-        LocalPlayerState human = game.Players[game.LocalPlayerIndex];
-        LocalPlayerState ghost = GetGhostPlayer(game);
+        PlayerState human = game.Players[game.LocalPlayerIndex];
+        PlayerState ghost = GetGhostPlayer(game);
 
         if (yourNameText != null)
             yourNameText.text = $"Toi : {human.playerName}";
@@ -218,8 +218,8 @@ public class LocalGameUI : MonoBehaviour
         ClearContainer(yourPlayedContainer);
         ClearContainer(ghostPlayedContainer);
 
-        LocalPlayerState human = game.Players[game.LocalPlayerIndex];
-        LocalPlayerState ghost = GetGhostPlayer(game);
+        PlayerState human = game.Players[game.LocalPlayerIndex];
+        PlayerState ghost = GetGhostPlayer(game);
 
         foreach (CardType card in human.discard)
         {
@@ -242,8 +242,8 @@ public class LocalGameUI : MonoBehaviour
         ClearContainer(yourHandContainer);
         ClearContainer(ghostHandContainer);
 
-        LocalPlayerState human = game.Players[game.LocalPlayerIndex];
-        LocalPlayerState ghost = GetGhostPlayer(game);
+        PlayerState human = game.Players[game.LocalPlayerIndex];
+        PlayerState ghost = GetGhostPlayer(game);
 
         bool canPlay =
             !game.RoundFinished &&
@@ -393,7 +393,7 @@ public class LocalGameUI : MonoBehaviour
         return result;
     }
 
-    private LocalPlayerState GetGhostPlayer(GameState game)
+    private PlayerState GetGhostPlayer(GameState game)
     {
         int ghostIndex = GetGhostPlayerIndex(game);
         return ghostIndex >= 0 ? game.Players[ghostIndex] : null;

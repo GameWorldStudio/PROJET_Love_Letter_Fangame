@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell($b=[System.IO.File]::ReadAllBytes\\('Assets/Scripts/GameCore/Services/CardEffectService.cs'\\); $i=[Array]::IndexOf\\($b,[byte]0xE9\\); $bom = \\($b[0] -eq 0xEF -and $b[1] -eq 0xBB -and $b[2] -eq 0xBF\\); Write-Output \\(\"0xE9 index: $i\"\\); Write-Output \\(\"UTF8 BOM: $bom\"\\); $c3=[Array]::IndexOf\\($b,[byte]0xC3\\); Write-Output \\(\"0xC3 index: $c3\"\\))",
+      "Bash(git check-ignore *)",
+      "PowerShell($f='Assets\\\\Scripts\\\\UI\\\\LocalGameUI.cs'; $b=[System.IO.File]::ReadAllBytes\\($f\\); $bom = \\($b[0] -eq 0xEF -and $b[1] -eq 0xBB -and $b[2] -eq 0xBF\\); Write-Output \\(\"BOM: $bom\"\\); $idx=[Array]::IndexOf\\($b,[byte]0xC3\\); Write-Output \\(\"first 0xC3 at: $idx\"\\); if\\($idx -ge 0\\){ Write-Output \\(\"bytes around: \" + \\($b[$idx..\\([Math]::Min\\($idx+3,$b.Length-1\\)\\)] | ForEach-Object { $_.ToString\\('X2'\\) }\\) \\) }; Write-Output '--- git diff numstat ---')",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(set -e)",
+      "Bash(git rm *)",
+      "Bash(git mv *)"
+    ]
+  }
+}
