@@ -1,9 +1,9 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class LocalGameController : MonoBehaviour
 {
     [SerializeField] private string humanPlayerName = "Toi";
-    [SerializeField] private string ghostPlayerName = "Fant�me";
+    [SerializeField] private string ghostPlayerName = "Fantôme";
     [SerializeField] private float ghostPlayDelay = 1f;
     [SerializeField] private LocalGamePresentation presentation;
     [SerializeField] private LocalBotTurnRunner botTurnRunner;

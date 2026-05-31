@@ -1,4 +1,4 @@
-using Mirror;
+ï»¿using Mirror;
 using System;
 using UnityEngine;
 
@@ -54,7 +54,7 @@ public class LoveLetterNetworkPlayer : NetworkBehaviour
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
-        Debug.Log($"NetworkPlayer local démarré. Index courant = {PlayerIndex}");
+        Debug.Log($"NetworkPlayer local dÃ©marrÃ©. Index courant = {PlayerIndex}");
     }
 
     [Command]

@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using System.Linq;
 
 public class EndRoundService
@@ -68,12 +68,12 @@ public class EndRoundService
             state.Players[winnerIndex].score++;
 
             AddLog(state,
-                $"{state.Players[winnerIndex].playerName} gagne à la carte la plus forte ({state.Players[winnerIndex].hand[0]}).");
+                $"{state.Players[winnerIndex].playerName} gagne Ã  la carte la plus forte ({state.Players[winnerIndex].hand[0]}).");
         }
         else
         {
             string winnerNames = string.Join(", ", winners.Select(i => state.Players[i].playerName));
-            AddLog(state, $"Égalité à la carte la plus forte entre {winnerNames}.");
+            AddLog(state, $"Ã‰galitÃ© Ã  la carte la plus forte entre {winnerNames}.");
         }
 
         state.RoundFinished = true;

@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Linq;
 using UnityEngine;
 
@@ -16,7 +16,7 @@ public class NetworkGamePresenter : MonoBehaviour
     {
         if (localPlayer == null)
         {
-            Debug.LogError("NetworkGamePresenter : localPlayer non assigné.");
+            Debug.LogError("NetworkGamePresenter : localPlayer non assignÃ©.");
             return;
         }
 
@@ -119,11 +119,11 @@ public class NetworkGamePresenter : MonoBehaviour
         switch (gameEvent.EventType)
         {
             case LoveLetterNetworkEventType.CardPlayed:
-                Debug.Log($"[EVENT] Joueur {gameEvent.PlayerIndex} a joué {(CardType)gameEvent.CardValue}");
+                Debug.Log($"[EVENT] Joueur {gameEvent.PlayerIndex} a jouÃ© {(CardType)gameEvent.CardValue}");
                 break;
 
             case LoveLetterNetworkEventType.PlayerEliminated:
-                Debug.Log($"[EVENT] Joueur {gameEvent.PlayerIndex} éliminé");
+                Debug.Log($"[EVENT] Joueur {gameEvent.PlayerIndex} Ã©liminÃ©");
                 break;
 
             case LoveLetterNetworkEventType.CardsRevealed:
@@ -131,11 +131,11 @@ public class NetworkGamePresenter : MonoBehaviour
                 break;
 
             case LoveLetterNetworkEventType.RoundStarted:
-                Debug.Log("[EVENT] Manche démarrée");
+                Debug.Log("[EVENT] Manche dÃ©marrÃ©e");
                 break;
 
             case LoveLetterNetworkEventType.RoundEnded:
-                Debug.Log("[EVENT] Manche terminée");
+                Debug.Log("[EVENT] Manche terminÃ©e");
                 break;
         }
     }

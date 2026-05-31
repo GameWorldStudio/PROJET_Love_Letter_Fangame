@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class NetworkGameEventListener : MonoBehaviour
 {
@@ -33,7 +33,7 @@ public class NetworkGameEventListener : MonoBehaviour
                 break;
 
             case LoveLetterNetworkEventType.RoundStarted:
-                Debug.Log("FX/UI : démarrage de manche");
+                Debug.Log("FX/UI : dÃ©marrage de manche");
                 break;
 
             case LoveLetterNetworkEventType.RoundEnded:
@@ -50,7 +50,7 @@ public class NetworkGameEventListener : MonoBehaviour
 
     private void HandlePlayerEliminated(LoveLetterNetworkEvent gameEvent)
     {
-        Debug.Log($"FX/UI : joueur {gameEvent.PlayerIndex} éliminé");
+        Debug.Log($"FX/UI : joueur {gameEvent.PlayerIndex} Ã©liminÃ©");
     }
 
     private void HandleCardsRevealed(LoveLetterNetworkEvent gameEvent)

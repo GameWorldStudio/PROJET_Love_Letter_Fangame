@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 
 public class GameEngine
 {
@@ -69,8 +69,8 @@ public class GameEngine
         player.hand.Remove(command.Card);
         player.discard.Add(command.Card);
 
-        // La carte jouée n'est plus en main : si quelqu'un "connaissait" sa main restante
-        // de façon obsolète, il faut invalider cette connaissance.
+        // La carte jouÃ©e n'est plus en main : si quelqu'un "connaissait" sa main restante
+        // de faÃ§on obsolÃ¨te, il faut invalider cette connaissance.
         botMemoryService.HandleCardPlayedFromHand(state, command.PlayerIndex, command.Card);
         botMemoryService.RememberPublicCardPlay(state, command.PlayerIndex, command.Card, "PublicPlay");
 
@@ -98,7 +98,7 @@ public class GameEngine
 
                     var validTargets = targetingService.GetValidTargets(state, command.PlayerIndex, command.Card);
 
-                    // Si aucune cible valide, la carte est jouée dans le vide
+                    // Si aucune cible valide, la carte est jouÃ©e dans le vide
                     // et le tour doit simplement se terminer.
                     if (validTargets == null || validTargets.Count == 0)
                     {
@@ -228,7 +228,7 @@ public class GameEngine
         return card switch
         {
             CardType.Guard => "la Garde",
-            CardType.Priest => "le Prêtre",
+            CardType.Priest => "le PrÃªtre",
             CardType.Baron => "le Baron",
             CardType.Handmaid => "la Servante",
             CardType.Prince => "le Prince",

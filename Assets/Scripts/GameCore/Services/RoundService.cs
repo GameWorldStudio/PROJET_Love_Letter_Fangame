@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class RoundService
@@ -48,7 +48,7 @@ public class RoundService
 
         botMemoryService.InitializeForNewRound(state);
 
-        AddLog(state, "Nouvelle manche commenc�e.");
+        AddLog(state, "Nouvelle manche commencée.");
         AddLog(state, $"{state.Players[state.CurrentTurnIndex].playerName} commence la manche.");
 
         result.Events.Add(new RoundStartedEvent());

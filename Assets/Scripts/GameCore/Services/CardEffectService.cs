@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using static UnityEngine.GraphicsBuffer;
 
 public class CardEffectService
@@ -40,7 +40,7 @@ public class CardEffectService
           state,
           casterIndex,
           result,
-          $"{caster.playerName} défausse la Princesse et est éliminé."
+          $"{caster.playerName} dÃ©fausse la Princesse et est Ã©liminÃ©."
       );
                 break;
         }
@@ -104,7 +104,7 @@ public class CardEffectService
         CardType casterCard = caster.hand[0];
         CardType targetCard = target.hand[0];
 
-        AddLog(state, $"{caster.playerName} compare sa main avec {target.playerName} grâce au Baron.");
+        AddLog(state, $"{caster.playerName} compare sa main avec {target.playerName} grÃ¢ce au Baron.");
 
         result.Events.Add(new CardsRevealedEvent
         {
@@ -161,7 +161,7 @@ public class CardEffectService
         }
         else
         {
-            AddLog(state, "Égalité avec le Baron.");
+            AddLog(state, "Ã‰galitÃ© avec le Baron.");
         }
 
         result.StateChanged = true;
@@ -219,7 +219,7 @@ public class CardEffectService
             );
         }
 
-        AddLog(state, $"{caster.playerName} échange sa main avec {target.playerName}.");
+        AddLog(state, $"{caster.playerName} Ã©change sa main avec {target.playerName}.");
 
         result.StateChanged = true;
         result.ShouldRefreshUi = true;
@@ -273,7 +273,7 @@ public class CardEffectService
         target.discard.Add(discarded);
         target.isProtected = false;
 
-        AddLog(state, $"{target.playerName} défausse {discarded}.");
+        AddLog(state, $"{target.playerName} dÃ©fausse {discarded}.");
 
         if (discarded == CardType.Princess)
         {
@@ -283,7 +283,7 @@ public class CardEffectService
                     state,
                     targetIndex,
                     result,
-                    $"{target.playerName} est éliminé en défaussant la Princesse."
+                    $"{target.playerName} est Ã©liminÃ© en dÃ©faussant la Princesse."
                 );
                 return;
             }
@@ -298,7 +298,7 @@ public class CardEffectService
         {
             target.hand.Add(state.HiddenBurnedCard);
             state.HasHiddenBurnedCard = false;
-            AddLog(state, $"{target.playerName} repioche la carte face cachée.");
+            AddLog(state, $"{target.playerName} repioche la carte face cachÃ©e.");
         }
         else
         {
@@ -320,14 +320,14 @@ public class CardEffectService
         if (!string.IsNullOrEmpty(logMessage))
             AddLog(state, logMessage);
 
-        // Règle globale : un joueur éliminé défausse sa carte restante
+        // RÃ¨gle globale : un joueur Ã©liminÃ© dÃ©fausse sa carte restante
         if (player.hand != null && player.hand.Count > 0)
         {
             CardType remainingCard = player.hand[0];
             player.hand.Clear();
             player.discard.Add(remainingCard);
 
-            AddLog(state, $"{player.playerName} défausse {remainingCard} en étant éliminé.");
+            AddLog(state, $"{player.playerName} dÃ©fausse {remainingCard} en Ã©tant Ã©liminÃ©.");
             botMemoryService?.RememberPublicDiscard(state, playerIndex, remainingCard, "EliminationDiscard");
         }
 

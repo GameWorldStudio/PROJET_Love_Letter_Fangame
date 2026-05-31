@@ -1,4 +1,4 @@
-using Mirror;
+ï»¿using Mirror;
 using UnityEngine;
 
 public class LoveLetterRoomPlayer : NetworkRoomPlayer
@@ -36,13 +36,13 @@ public class LoveLetterRoomPlayer : NetworkRoomPlayer
 
     void OnNameChanged(string oldValue, string newValue)
     {
-        // ici tu peux rafraîchir ton UI lobby si besoin
+        // ici tu peux rafraÃ®chir ton UI lobby si besoin
     }
 
     public override void ReadyStateChanged(bool oldReadyState, bool newReadyState)
     {
         base.ReadyStateChanged(oldReadyState, newReadyState);
-        // utile si tu veux afficher "prêt / non prêt"
+        // utile si tu veux afficher "prÃªt / non prÃªt"
     }
 
     public override void IndexChanged(int oldIndex, int newIndex)

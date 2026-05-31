@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 
@@ -25,7 +25,7 @@ public class LoveLetterRoomManager : NetworkRoomManager
     {
         base.Start();
 
-        // sécurité : le maxConnections du manager suit la valeur de roomPlayerLimit
+        // sÃ©curitÃ© : le maxConnections du manager suit la valeur de roomPlayerLimit
         maxConnections = Mathf.Max(2, roomPlayerLimit);
     }
 
@@ -52,7 +52,7 @@ public class LoveLetterRoomManager : NetworkRoomManager
 
     public override void OnRoomServerConnect(NetworkConnectionToClient conn)
     {
-        // si la partie a démarré, on bloque les nouveaux entrants
+        // si la partie a dÃ©marrÃ©, on bloque les nouveaux entrants
         if (gameStarted)
         {
             conn.Disconnect();
@@ -139,7 +139,7 @@ public class LoveLetterRoomManager : NetworkRoomManager
 
         if (numPlayers < 2)
         {
-            Debug.LogWarning("Impossible de démarrer : il faut au moins 2 joueurs.");
+            Debug.LogWarning("Impossible de dÃ©marrer : il faut au moins 2 joueurs.");
             return;
         }
 

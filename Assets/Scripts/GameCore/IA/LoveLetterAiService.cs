@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -31,28 +31,28 @@ public class RevealedCardInfo
 }
 
 /// <summary>
-/// Représentation minimale attendue côté IA.
-/// Adapte cette classe à ton modèle existant si besoin.
+/// ReprÃ©sentation minimale attendue cÃ´tÃ© IA.
+/// Adapte cette classe Ã  ton modÃ¨le existant si besoin.
 /// </summary>
 public class AiGameState
 {
     public List<AiPlayerState> Players = new List<AiPlayerState>();
 
-    /// <summary>Défausse globale de la manche.</summary>
+    /// <summary>DÃ©fausse globale de la manche.</summary>
     public List<CardType> DiscardedCards = new List<CardType>();
 
-    /// <summary>Cartes visibles mises de côté en partie à 2 joueurs.</summary>
+    /// <summary>Cartes visibles mises de cÃ´tÃ© en partie Ã  2 joueurs.</summary>
     public List<CardType> VisibleSideCards = new List<CardType>();
 
-    /// <summary>Infos connues par effets type Prêtre / révélations fin de manche / Baron.</summary>
+    /// <summary>Infos connues par effets type PrÃªtre / rÃ©vÃ©lations fin de manche / Baron.</summary>
     public List<RevealedCardInfo> RevealedHandInfos = new List<RevealedCardInfo>();
 
     public int CurrentTurnIndex;
     public bool IsTwoPlayersMode;
 
     /// <summary>
-    /// Si tu as déjà une règle côté moteur, garde-la là-bas.
-    /// L’IA suppose ici que les coups générés sont jouables.
+    /// Si tu as dÃ©jÃ  une rÃ¨gle cÃ´tÃ© moteur, garde-la lÃ -bas.
+    /// Lâ€™IA suppose ici que les coups gÃ©nÃ©rÃ©s sont jouables.
     /// </summary>
     public bool IsRoundFinished;
 
@@ -73,7 +73,7 @@ public class AiPlayerState
 }
 
 /// <summary>
-/// Connaissance reconstruite par l’IA.
+/// Connaissance reconstruite par lâ€™IA.
 /// </summary>
 public class AiKnowledge
 {
@@ -88,7 +88,7 @@ public class AiKnowledge
 }
 
 /// <summary>
-/// IA Love Letter basée sur un système de génération de coups + scoring.
+/// IA Love Letter basÃ©e sur un systÃ¨me de gÃ©nÃ©ration de coups + scoring.
 /// </summary>
 public class LoveLetterAiService
 {
@@ -109,7 +109,7 @@ public class LoveLetterAiService
         var legalMoves = GenerateLegalMoves(game, aiPlayerIndex);
         if (legalMoves.Count == 0)
         {
-            Debug.LogWarning($"[AI] Aucun coup généré pour le joueur {aiPlayerIndex}. Etat probablement incohérent.");
+            Debug.LogWarning($"[AI] Aucun coup gÃ©nÃ©rÃ© pour le joueur {aiPlayerIndex}. Etat probablement incohÃ©rent.");
             return null;
         }
 
@@ -180,8 +180,8 @@ public class LoveLetterAiService
             else
             {
                 // Aucun joueur ciblable :
-                // on génère quand même le play "dans le vide"
-                // sauf pour le Prince qui doit idéalement se jouer sur soi.
+                // on gÃ©nÃ¨re quand mÃªme le play "dans le vide"
+                // sauf pour le Prince qui doit idÃ©alement se jouer sur soi.
                 if (card == CardType.Prince)
                 {
                     results.Add(new AiDecision
@@ -205,7 +205,7 @@ public class LoveLetterAiService
     }
 
     /// <summary>
-    /// Applique ici les contraintes de règles fortes :
+    /// Applique ici les contraintes de rÃ¨gles fortes :
     /// - Comtesse obligatoire si Comtesse + Roi/Prince
     /// </summary>
     private List<CardType> GetPlayableCardsRespectingRules(List<CardType> hand)
@@ -251,20 +251,20 @@ public class LoveLetterAiService
             if (player.IsEliminated)
                 continue;
 
-            // Prince peut se cibler soi-même
+            // Prince peut se cibler soi-mÃªme
             bool selfAllowed = (card == CardType.Prince);
 
             if (i == aiPlayerIndex && !selfAllowed)
                 continue;
 
-            // joueurs protégés non ciblables
+            // joueurs protÃ©gÃ©s non ciblables
             if (player.IsProtected)
                 continue;
 
             validTargets.Add(i);
         }
 
-        // Cas spécial : le Prince doit pouvoir se jouer sur soi si aucun autre joueur valide
+        // Cas spÃ©cial : le Prince doit pouvoir se jouer sur soi si aucun autre joueur valide
         if (card == CardType.Prince)
         {
             var self = game.Players[aiPlayerIndex];
@@ -288,11 +288,11 @@ public class LoveLetterAiService
         foreach (var kvp in BaseDeckCounts)
             k.RemainingCounts[kvp.Key] = kvp.Value;
 
-        // 1. Défausse globale
+        // 1. DÃ©fausse globale
         foreach (var discarded in game.DiscardedCards)
             DecrementIfExists(k.RemainingCounts, discarded);
 
-        // 2. Cartes visibles de côté (parties à 2)
+        // 2. Cartes visibles de cÃ´tÃ© (parties Ã  2)
         foreach (var side in game.VisibleSideCards)
         {
             k.VisibleSideCards.Add(side);
@@ -304,7 +304,7 @@ public class LoveLetterAiService
         foreach (var card in aiPlayer.Hand)
             DecrementIfExists(k.RemainingCounts, card);
 
-        // 4. Cartes connues / révélées encore valides
+        // 4. Cartes connues / rÃ©vÃ©lÃ©es encore valides
         foreach (var info in game.RevealedHandInfos)
         {
             if (!info.stillValid)
@@ -326,25 +326,25 @@ public class LoveLetterAiService
 
             if (knownCount > 0 && game.Players[aiPlayerIndex].Hand != null && game.Players[aiPlayerIndex].Hand.Count > 0)
             {
-                // Après retrait de la carte jouée, le bot garde normalement une seule carte "réelle" importante.
-                // Ici on prend la meilleure approximation : si une carte est connue de l'extérieur,
-                // on considère que l'une des cartes en main est exposée.
-                // Le scoring précis se fera sur "l'autre carte" quand on évalue le coup.
+                // AprÃ¨s retrait de la carte jouÃ©e, le bot garde normalement une seule carte "rÃ©elle" importante.
+                // Ici on prend la meilleure approximation : si une carte est connue de l'extÃ©rieur,
+                // on considÃ¨re que l'une des cartes en main est exposÃ©e.
+                // Le scoring prÃ©cis se fera sur "l'autre carte" quand on Ã©value le coup.
                 k.IsMyCardKnown = true;
             }
         }
 
-        // Si l'IA a une carte précisément connue (ex: vue avec Prêtre), on la récupère
+        // Si l'IA a une carte prÃ©cisÃ©ment connue (ex: vue avec PrÃªtre), on la rÃ©cupÃ¨re
         if (k.KnownPlayerCard.TryGetValue(aiPlayerIndex, out var knownMyCard) && knownMyCard.HasValue)
         {
             k.KnownMyCard = knownMyCard.Value;
 
-            // Une Garde connue n'est pas vraiment problématique dans ta règle métier
+            // Une Garde connue n'est pas vraiment problÃ©matique dans ta rÃ¨gle mÃ©tier
             if (knownMyCard.Value != CardType.Guard)
                 k.IsMyCardKnown = true;
         }
 
-        // 5. Probabilités par joueur
+        // 5. ProbabilitÃ©s par joueur
         BuildProbabilities(game, aiPlayerIndex, k);
 
         return k;
@@ -378,7 +378,7 @@ public class LoveLetterAiService
                 penalty = 4f;
                 break;
             case CardType.Handmaid:
-                penalty = 1f; // si on garde Servante, ce n’est pas trop grave
+                penalty = 1f; // si on garde Servante, ce nâ€™est pas trop grave
                 break;
             case CardType.Guard:
                 penalty = 2f;
@@ -400,7 +400,7 @@ public class LoveLetterAiService
 
             var probs = new Dictionary<CardType, float>();
 
-            // Si on connaît exactement la carte du joueur, proba = 100%
+            // Si on connaÃ®t exactement la carte du joueur, proba = 100%
             if (k.KnownPlayerCard.TryGetValue(player.PlayerIndex, out var known) && known.HasValue)
             {
                 foreach (CardType ct in Enum.GetValues(typeof(CardType)))
@@ -440,11 +440,11 @@ public class LoveLetterAiService
 
             // Nombre de "slots" inconnus qui peuvent contenir une carte :
             // - mains adverses inconnues
-            // - carte cachée brûlée
+            // - carte cachÃ©e brÃ»lÃ©e
             int hiddenSlots = Mathf.Max(0, game.HiddenCardCount);
             int totalSlots = unknownOpponentCount + hiddenSlots;
 
-            // Sécurité : si jamais totalSlots == 0, on retombe sur une distribution simple
+            // SÃ©curitÃ© : si jamais totalSlots == 0, on retombe sur une distribution simple
             if (totalSlots <= 0 || totalUnknownCards <= 0)
             {
                 foreach (CardType ct in Enum.GetValues(typeof(CardType)))
@@ -474,8 +474,8 @@ public class LoveLetterAiService
                     continue;
                 }
 
-                // Hypothèse simple mais juste pour Love Letter :
-                // chaque carte restante a autant de chances d'être dans n'importe quel slot inconnu
+                // HypothÃ¨se simple mais juste pour Love Letter :
+                // chaque carte restante a autant de chances d'Ãªtre dans n'importe quel slot inconnu
                 // donc P(carte chez CE joueur) = count / totalUnknownCards
                 float probability = (float)count / totalUnknownCards;
                 probs[ct] = probability;
@@ -510,7 +510,7 @@ public class LoveLetterAiService
 
         CardType remainingCard = GetOtherCardInHand(game.Players[aiPlayerIndex].Hand, move.cardToPlay);
 
-        // Score lié à la cible
+        // Score liÃ© Ã  la cible
         if (move.targetPlayerIndex >= 0)
             score += EvaluateTargetPriority(game, k, aiPlayerIndex, move.targetPlayerIndex);
 
@@ -549,15 +549,15 @@ public class LoveLetterAiService
                 break;
 
             default:
-                reason = "Carte non gérée.";
+                reason = "Carte non gÃ©rÃ©e.";
                 break;
         }
 
-        // Nouvelle logique : si la carte qu'on garde est connue, on pénalise
-        // sauf si le coup joué protège / change / tue / esquive naturellement déjà via son score.
+        // Nouvelle logique : si la carte qu'on garde est connue, on pÃ©nalise
+        // sauf si le coup jouÃ© protÃ¨ge / change / tue / esquive naturellement dÃ©jÃ  via son score.
         float exposurePenalty = EvaluateExposurePenalty(k, remainingCard);
 
-        // La Servante protège justement la carte connue
+        // La Servante protÃ¨ge justement la carte connue
         if (move.cardToPlay == CardType.Handmaid)
             exposurePenalty *= 0.15f;
 
@@ -572,7 +572,7 @@ public class LoveLetterAiService
         score -= exposurePenalty;
 
         if (exposurePenalty > 0f)
-            reason += $" | pénalité exposition={exposurePenalty:F1}";
+            reason += $" | pÃ©nalitÃ© exposition={exposurePenalty:F1}";
 
         score += EvaluatePlayingKnownCardBonus(k, move.cardToPlay, remainingCard);
         move.reason = reason;
@@ -581,14 +581,14 @@ public class LoveLetterAiService
 
     private float EvaluatePrincessMove(AiGameState game, int aiPlayerIndex, AiDecision move, out string reason)
     {
-        // Toujours catastrophique, sauf si c’est le seul coup généré.
-        reason = "Princesse à éviter absolument sauf si aucun autre coup n'est possible.";
+        // Toujours catastrophique, sauf si câ€™est le seul coup gÃ©nÃ©rÃ©.
+        reason = "Princesse Ã  Ã©viter absolument sauf si aucun autre coup n'est possible.";
         return -10000f;
     }
 
     private float EvaluateCountessMove(AiGameState game, int aiPlayerIndex, AiDecision move, out string reason)
     {
-        reason = "Comtesse jouée (souvent contrainte de règle).";
+        reason = "Comtesse jouÃ©e (souvent contrainte de rÃ¨gle).";
         return 1f;
     }
 
@@ -608,7 +608,7 @@ public class LoveLetterAiService
             else if (otherValue >= 5)
                 score += 3f;
 
-            reason = "Garde jouée sans cible valide pour se débarrasser d'une carte faible.";
+            reason = "Garde jouÃ©e sans cible valide pour se dÃ©barrasser d'une carte faible.";
             return score;
         }
 
@@ -649,7 +649,7 @@ public class LoveLetterAiService
                 score -= 3f;
         }
 
-        reason = $"Garde sur J{move.targetPlayerIndex} en annonçant {move.guessedCard} (proba={guessProbability:F2}).";
+        reason = $"Garde sur J{move.targetPlayerIndex} en annonÃ§ant {move.guessedCard} (proba={guessProbability:F2}).";
         return score;
     }
 
@@ -669,7 +669,7 @@ public class LoveLetterAiService
             else if (otherValue >= 5)
                 score += 2f;
 
-            reason = "Prêtre joué sans cible valide, principalement pour conserver une meilleure carte.";
+            reason = "PrÃªtre jouÃ© sans cible valide, principalement pour conserver une meilleure carte.";
             return score;
         }
 
@@ -688,7 +688,7 @@ public class LoveLetterAiService
         if (myValue >= 5)
             score += 1.5f;
 
-        reason = $"Prêtre sur J{move.targetPlayerIndex} pour gagner de l'information.";
+        reason = $"PrÃªtre sur J{move.targetPlayerIndex} pour gagner de l'information.";
         return score;
     }
 
@@ -701,13 +701,13 @@ public class LoveLetterAiService
         {
             float score = -1f;
 
-            // Si on a une petite carte, jeter le Baron peut être correct
+            // Si on a une petite carte, jeter le Baron peut Ãªtre correct
             if (myValue <= 2)
                 score += 2f;
             else if (myValue >= 6)
                 score -= 2f;
 
-            reason = "Baron joué sans cible valide ; défausse opportuniste.";
+            reason = "Baron jouÃ© sans cible valide ; dÃ©fausse opportuniste.";
             return score;
         }
 
@@ -728,7 +728,7 @@ public class LoveLetterAiService
             else if (myValue < enemyValue)
             {
                 totalScore -= 12f;
-                reason = $"Baron défavorable certain contre {known.Value}.";
+                reason = $"Baron dÃ©favorable certain contre {known.Value}.";
             }
             else
             {
@@ -756,7 +756,7 @@ public class LoveLetterAiService
         totalScore += winChance * 10f;
         totalScore -= loseChance * 12f;
 
-        reason = $"Baron sur J{move.targetPlayerIndex} avec chance victoire={winChance:F2}, défaite={loseChance:F2}.";
+        reason = $"Baron sur J{move.targetPlayerIndex} avec chance victoire={winChance:F2}, dÃ©faite={loseChance:F2}.";
         return totalScore;
     }
 
@@ -774,7 +774,7 @@ public class LoveLetterAiService
 
         score += Mathf.Clamp(aliveCount - 2, 0, 4);
 
-        // Nouveau : énorme bonus si la carte gardée est connue
+        // Nouveau : Ã©norme bonus si la carte gardÃ©e est connue
         if (k.IsMyCardKnown)
         {
             score += 6f + (k.KnownByPlayerCount - 1) * 2f;
@@ -783,7 +783,7 @@ public class LoveLetterAiService
                 score += 3f;
         }
 
-        reason = $"Servante jouée pour protéger une carte de valeur {otherValue}.";
+        reason = $"Servante jouÃ©e pour protÃ©ger une carte de valeur {otherValue}.";
         return score;
     }
 
@@ -792,18 +792,18 @@ public class LoveLetterAiService
         if (!k.IsMyCardKnown || k.KnownByPlayerCount <= 0)
             return 0f;
 
-        // Si la carte connue est une Garde, on ne force pas de comportement spécial
+        // Si la carte connue est une Garde, on ne force pas de comportement spÃ©cial
         if (k.KnownMyCard == CardType.Guard)
             return 0f;
 
         float bonus = 0f;
 
-        // Très important : si on joue précisément la carte exposée, on est récompensé
+        // TrÃ¨s important : si on joue prÃ©cisÃ©ment la carte exposÃ©e, on est rÃ©compensÃ©
         if (playedCard == k.KnownMyCard)
         {
             bonus += 6f + (k.KnownByPlayerCount - 1) * 2f;
 
-            // Encore mieux si on garde une carte qui protège ou qui a de la valeur stratégique
+            // Encore mieux si on garde une carte qui protÃ¨ge ou qui a de la valeur stratÃ©gique
             if (remainingCard == CardType.Handmaid)
                 bonus += 2f;
 
@@ -813,18 +813,18 @@ public class LoveLetterAiService
             return bonus;
         }
 
-        // Si on garde la carte exposée, légère pénalité supplémentaire
+        // Si on garde la carte exposÃ©e, lÃ©gÃ¨re pÃ©nalitÃ© supplÃ©mentaire
         if (remainingCard == k.KnownMyCard)
         {
             bonus -= 4f + (k.KnownByPlayerCount - 1) * 1.5f;
 
-            // Cas typique que tu décris :
-            // je garde une carte connue (ex: Servante) et je joue un Garde spéculatif
+            // Cas typique que tu dÃ©cris :
+            // je garde une carte connue (ex: Servante) et je joue un Garde spÃ©culatif
             if (playedCard == CardType.Guard)
                 bonus -= 3f;
         }
 
-        // Ancienne logique conservée, mais affaiblie
+        // Ancienne logique conservÃ©e, mais affaiblie
         if (GetCardStrength(playedCard) > GetCardStrength(remainingCard))
             bonus += 1.5f;
 
@@ -845,11 +845,11 @@ public class LoveLetterAiService
             if (otherCard == CardType.Princess)
             {
                 score -= 500f;
-                reason = "Prince sur soi avec Princesse en main : quasi-suicide, à éviter sauf si forcé.";
+                reason = "Prince sur soi avec Princesse en main : quasi-suicide, Ã  Ã©viter sauf si forcÃ©.";
                 return score;
             }
 
-            // Utilité modérée si on veut reroll une main faible
+            // UtilitÃ© modÃ©rÃ©e si on veut reroll une main faible
             int value = GetCardStrength(otherCard);
             if (value <= 2) score += 4f;
             else if (value <= 4) score += 1f;
@@ -867,7 +867,7 @@ public class LoveLetterAiService
             if (known.Value == CardType.Princess)
             {
                 score += 100f;
-                reason = "Prince sur adversaire tenant la Princesse : élimination immédiate très forte.";
+                reason = "Prince sur adversaire tenant la Princesse : Ã©limination immÃ©diate trÃ¨s forte.";
                 return score;
             }
 
@@ -895,7 +895,7 @@ public class LoveLetterAiService
             return score;
         }
 
-        reason = "Prince sur adversaire sans info précise.";
+        reason = "Prince sur adversaire sans info prÃ©cise.";
         return score;
     }
 
@@ -915,7 +915,7 @@ public class LoveLetterAiService
             if (myValue >= 6)
                 score -= 3f;
 
-            reason = "Roi joué sans cible valide ; coup subi pour se défausser.";
+            reason = "Roi jouÃ© sans cible valide ; coup subi pour se dÃ©fausser.";
             return score;
         }
 
@@ -950,7 +950,7 @@ public class LoveLetterAiService
             return score;
         }
 
-        reason = "Roi joué sans information.";
+        reason = "Roi jouÃ© sans information.";
         return score;
     }
 
@@ -1011,13 +1011,13 @@ public class LoveLetterAiService
             }
             else if (Mathf.Abs(weightedScore - bestScore) < 0.0001f && best != CardType.None)
             {
-                // En cas d'égalité, on préfère la carte la plus forte
+                // En cas d'Ã©galitÃ©, on prÃ©fÃ¨re la carte la plus forte
                 if (GetCardStrength(kvp.Key) > GetCardStrength(best))
                     best = kvp.Key;
             }
         }
 
-        // Sécurité : si tout est à 0 ou aucune meilleure option trouvée,
+        // SÃ©curitÃ© : si tout est Ã  0 ou aucune meilleure option trouvÃ©e,
         // on prend la carte encore possible la plus forte
         if (best == CardType.None || bestScore <= 0f)
         {

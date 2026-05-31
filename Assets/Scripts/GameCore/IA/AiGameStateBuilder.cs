@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using System.Linq;
 
 public class AiGameStateBuilder
@@ -31,19 +31,19 @@ public class AiGameStateBuilder
             });
         }
 
-        // Défausse globale
+        // DÃ©fausse globale
         foreach (var p in state.Players)
         {
             aiState.DiscardedCards.AddRange(p.discard);
         }
 
-        // Cartes visibles côté (mode 2 joueurs)
+        // Cartes visibles cÃ´tÃ© (mode 2 joueurs)
         aiState.VisibleSideCards = new List<CardType>(state.VisibleBurnedCards);
 
-        // Carte cachée
+        // Carte cachÃ©e
         aiState.HiddenCardCount = state.HasHiddenBurnedCard ? 1 : 0;
 
-        // KnownByCounts existant côté state
+        // KnownByCounts existant cÃ´tÃ© state
         if (state.KnownByCounts != null)
         {
             aiState.KnownByCounts = new Dictionary<int, int>(state.KnownByCounts);
@@ -53,7 +53,7 @@ public class AiGameStateBuilder
             aiState.KnownByCounts = new Dictionary<int, int>();
         }
 
-        // Infos révélées depuis la mémoire du bot
+        // Infos rÃ©vÃ©lÃ©es depuis la mÃ©moire du bot
         aiState.RevealedHandInfos = BuildRevealedInfosFromMemory(state, botIndex, botMemory, aiState.KnownByCounts);
 
         return aiState;
@@ -90,7 +90,7 @@ public class AiGameStateBuilder
             if (targetPlayer.hand == null || targetPlayer.hand.Count == 0)
                 continue;
 
-            // On ne garde que les infos encore marquées valides
+            // On ne garde que les infos encore marquÃ©es valides
             if (!memoryInfo.stillValid)
                 continue;
 
@@ -102,13 +102,13 @@ public class AiGameStateBuilder
                 stillValid = true
             });
 
-            // Si on veut signaler qu'au moins un joueur connaît la carte de cette cible,
-            // on s'assure qu'il y a une entrée.
+            // Si on veut signaler qu'au moins un joueur connaÃ®t la carte de cette cible,
+            // on s'assure qu'il y a une entrÃ©e.
             if (!knownByCounts.ContainsKey(targetIndex))
                 knownByCounts[targetIndex] = 0;
 
-            // Le bot courant connaît au moins cette carte.
-            // On incrémente seulement si ce n'est pas lui-même.
+            // Le bot courant connaÃ®t au moins cette carte.
+            // On incrÃ©mente seulement si ce n'est pas lui-mÃªme.
             if (botIndex >= 0 && targetIndex != botIndex)
                 knownByCounts[targetIndex] = System.Math.Max(knownByCounts[targetIndex], 1);
         }

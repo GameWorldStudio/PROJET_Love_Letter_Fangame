@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 
 public class BotMemoryService
@@ -270,14 +270,14 @@ public class BotMemoryService
             if (!info.stillValid)
                 continue;
 
-            // Si la carte connue est précisément celle qui vient d'être jouée,
+            // Si la carte connue est prÃ©cisÃ©ment celle qui vient d'Ãªtre jouÃ©e,
             // alors la connaissance devient fausse.
             if (info.card == playedCard)
             {
                 info.stillValid = false;
             }
             // Sinon, on conserve l'info :
-            // cela signifie que le joueur a joué son autre carte,
+            // cela signifie que le joueur a jouÃ© son autre carte,
             // donc la carte connue reste logiquement en main.
         }
 

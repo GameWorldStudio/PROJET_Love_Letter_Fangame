@@ -1,4 +1,4 @@
-using TMPro;
+ï»¿using TMPro;
 using UnityEngine;
 using Mirror;
 
@@ -20,7 +20,7 @@ public class MainMenuUI : MonoBehaviour
     {
         if (roomManager == null)
         {
-            Debug.LogError("LoveLetterRoomManager introuvable dans la scène.");
+            Debug.LogError("LoveLetterRoomManager introuvable dans la scÃ¨ne.");
             return;
         }
 
@@ -47,7 +47,7 @@ public class MainMenuUI : MonoBehaviour
     {
         if (roomManager == null)
         {
-            Debug.LogError("LoveLetterRoomManager introuvable dans la scène.");
+            Debug.LogError("LoveLetterRoomManager introuvable dans la scÃ¨ne.");
             return;
         }
 

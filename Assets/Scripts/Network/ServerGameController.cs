@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
@@ -56,7 +56,7 @@ public class ServerGameController : NetworkBehaviour
             return;
 
         players.Add(player);
-        SendServerMessageTo(player, $"Inscrit côté serveur avec l'index {player.PlayerIndex}.");
+        SendServerMessageTo(player, $"Inscrit cÃ´tÃ© serveur avec l'index {player.PlayerIndex}.");
     }
 
     [Server]
@@ -81,7 +81,7 @@ public class ServerGameController : NetworkBehaviour
             TwoPlayersMode = twoPlayersMode,
             VisibleBurnedCardsInTwoPlayers = visibleBurnedCardsInTwoPlayers,
             HumanPlayerName = "Toi",
-            GhostPlayerName = "Fantôme"
+            GhostPlayerName = "FantÃ´me"
         };
 
         GameFlowResult result = gameEngine.StartRound(gameState, config);
@@ -130,7 +130,7 @@ public class ServerGameController : NetworkBehaviour
 
         if (gameState.PendingAction.casterIndex != sender.PlayerIndex)
         {
-            SendServerMessageTo(sender, "Ce n'est pas à toi de choisir la cible.");
+            SendServerMessageTo(sender, "Ce n'est pas Ã  toi de choisir la cible.");
             return;
         }
 
@@ -150,7 +150,7 @@ public class ServerGameController : NetworkBehaviour
 
         if (gameState.PendingAction.casterIndex != sender.PlayerIndex)
         {
-            SendServerMessageTo(sender, "Ce n'est pas à toi de choisir l'annonce de la Garde.");
+            SendServerMessageTo(sender, "Ce n'est pas Ã  toi de choisir l'annonce de la Garde.");
             return;
         }
 
@@ -170,7 +170,7 @@ public class ServerGameController : NetworkBehaviour
 
         if (!gameState.RoundFinished)
         {
-            SendServerMessageTo(sender, "La manche n'est pas encore terminée.");
+            SendServerMessageTo(sender, "La manche n'est pas encore terminÃ©e.");
             return;
         }
 
@@ -179,7 +179,7 @@ public class ServerGameController : NetworkBehaviour
             TwoPlayersMode = twoPlayersMode,
             VisibleBurnedCardsInTwoPlayers = visibleBurnedCardsInTwoPlayers,
             HumanPlayerName = "Toi",
-            GhostPlayerName = "Fantôme"
+            GhostPlayerName = "FantÃ´me"
         };
 
         GameFlowResult result = gameEngine.StartRound(gameState, config);
@@ -194,7 +194,7 @@ public class ServerGameController : NetworkBehaviour
 
         if (!HasStartedGame || gameState == null)
         {
-            SendServerMessageTo(sender, "La partie n'est pas encore prête.");
+            SendServerMessageTo(sender, "La partie n'est pas encore prÃªte.");
             return false;
         }
 
@@ -289,14 +289,14 @@ public class ServerGameController : NetworkBehaviour
         int casterIndex = gameState.PendingAction.casterIndex;
         int targetIndex = gameState.PendingAction.selectedTargetIndex;
 
-        // Prêtre : seul le caster voit
+        // PrÃªtre : seul le caster voit
         if (sourceCard == CardType.Priest)
         {
             SendToPlayerIndex(casterIndex, dto);
             return;
         }
 
-        // Baron : les deux concernés voient
+        // Baron : les deux concernÃ©s voient
         if (sourceCard == CardType.Baron)
         {
             SendToPlayerIndex(casterIndex, dto);
@@ -461,7 +461,7 @@ public class ServerGameController : NetworkBehaviour
 
         if (HasStartedGame)
         {
-            SendServerMessageTo(sender, "La partie a déjà commencé.");
+            SendServerMessageTo(sender, "La partie a dÃ©jÃ  commencÃ©.");
             return;
         }
 
@@ -475,7 +475,7 @@ public class ServerGameController : NetworkBehaviour
         // seul le joueur d'index 0 peut lancer la partie
         if (sender.PlayerIndex != 0)
         {
-            SendServerMessageTo(sender, "Seul l'hôte peut lancer la partie.");
+            SendServerMessageTo(sender, "Seul l'hÃ´te peut lancer la partie.");
             return;
         }
 
